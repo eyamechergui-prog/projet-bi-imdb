@@ -1,0 +1,69 @@
+
+version: 2
+
+models:
+  - name: dim_film
+    description: "Dimension descriptive des films IMDb"
+    columns:
+      - name: tconst
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: "Dimension des années de sortie"
+    columns:
+      - name: annee
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_genre
+    description: "Dimension des genres cinématographiques"
+    columns:
+      - name: genre_key
+        data_tests:
+          - unique
+          - not_null
+      - name: nom_genre
+        data_tests:
+          - unique
+          - not_null
+
+  - name: fait_film
+    description: "Table de faits contenant les notes et votes IMDb"
+    columns:
+      - name: tconst
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_film')
+                field: tconst
+
+      - name: annee
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: annee
+
+  - name: pont_film_genre
+    description: "Association entre films et genres"
+    columns:
+      - name: tconst
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_film')
+                field: tconst
+
+      - name: genre_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_genre')
+                field: genre_key

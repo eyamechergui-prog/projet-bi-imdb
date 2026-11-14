@@ -1,0 +1,33 @@
+# Environnement Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Données IMDb
+data/raw/*
+data/export/*
+!data/raw/.gitkeep
+!data/export/.gitkeep
+
+# Base DuckDB et fichiers temporaires
+*.duckdb
+*.duckdb.wal
+*.duckdb.tmp
+
+# Fichiers générés par dbt
+**/target/
+**/logs/
+**/dbt_packages/
+**/.user.yml
+
+# Configuration locale et secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Fichiers système
+.DS_Store
+Thumbs.db
